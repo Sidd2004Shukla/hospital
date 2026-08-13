@@ -1,4 +1,4 @@
-name: Python Quality Gates
+name: Python Quality Gates & Docker Publish
 
 on:
   push:
@@ -10,17 +10,17 @@ permissions:
   contents: read
 
 jobs:
-  quality-gates:
+  quality-gates-and-publish:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.14"
+          python-version: "3.11"
           cache: "pip"
 
       - name: Install dependencies
@@ -35,23 +35,28 @@ jobs:
         run: |
           ruff check .
 
-      # GATE 2: Tests + 80% coverage
+      # GATE 2: Tests + 85% coverage
       - name: Gate 2 - Pytest coverage
         run: |
-          pytest --cov=student_account --cov-report=term-missing --cov-report=xml --cov-fail-under=80
+          pytest --cov=src.hospital --cov-report=term-missing --cov-report=xml --cov-fail-under=85
 
       # GATE 3: Security
       - name: Gate 3 - Bandit security scan
         run: |
-          bandit -r src
+          bandit -r src/
 
-      # Only reached if all three gates pass
-      - name: Build wheel
-        run: |
-          python -m build --wheel
-
-      - name: Upload wheel artifact
-        uses: actions/upload-artifact@v4
+      # DOCKER HUB PUBLISHING (Only runs on push to main/master branches)
+      - name: Log in to Docker Hub
+        if: github.event_name == 'push'
+        uses: docker/login-action@v3
         with:
-          name: student-account-wheel
-          path: dist/*.whl
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        if: github.event_name == 'push'
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/hospital-api:latest
