@@ -1,11 +1,10 @@
 import os
 from logging.config import fileConfig
 
-from dotenv import load_dotenv
-from sqlalchemy import engine_from_config, pool
-
 from alembic import context
+from dotenv import load_dotenv
 from hospital.database import Base
+from sqlalchemy import engine_from_config, pool
 
 # 1. Load environment variables from the .env file
 load_dotenv()
