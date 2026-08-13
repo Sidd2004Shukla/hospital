@@ -5,12 +5,10 @@ Revises:
 Create Date: 2026-08-13 14:15:39.920958
 
 """
-
-from typing import Union
+# ruff: noqa
 from collections.abc import Sequence
 
 import sqlalchemy as sa
-
 from alembic import op
 
 # revision identifiers, used by Alembic.
