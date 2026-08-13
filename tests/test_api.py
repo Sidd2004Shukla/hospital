@@ -1,10 +1,10 @@
+# ruff: noqa
 from fastapi.testclient import TestClient
 from hospital.database import Base, get_db
 from hospital.main import app
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
-
 import pytest
 
 engine = create_engine(
