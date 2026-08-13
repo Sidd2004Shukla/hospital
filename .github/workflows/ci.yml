@@ -35,11 +35,13 @@ jobs:
         run: |
           ruff check .
 
-      # GATE 2: Tests + 80% coverage
+# GATE 2: Tests + 85% coverage
       - name: Gate 2 - Pytest coverage
+        env:
+          PYTHONPATH: src
         run: |
-          pytest  --cov=src.hospital --cov-report=term-missing --cov-report=xml --cov-fail-under=85
-
+          pytest tests/ --cov=hospital --cov-report=term-missing --cov-report=xml --cov-fail-under=85
+          
       # GATE 3: Security
       - name: Gate 3 - Bandit security scan
         run: |
