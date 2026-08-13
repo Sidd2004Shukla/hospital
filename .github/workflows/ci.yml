@@ -69,13 +69,13 @@ jobs:
         run: |
           bandit  .
 
-  docker_build:
+docker_build:
     name: Build Docker image
     runs-on: ubuntu-latest
     needs: tests
     env:
-      IMAGE_NAME_LATEST: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
-      IMAGE_NAME_SHA: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ github.sha }}
+      IMAGE_NAME_LATEST: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
+      IMAGE_NAME_SHA: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:${{ github.sha }}
     steps:
       - uses: actions/checkout@v4
       - name: Set up QEMU
@@ -86,8 +86,8 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' }}
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
