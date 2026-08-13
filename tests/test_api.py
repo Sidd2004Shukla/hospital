@@ -228,7 +228,7 @@ def test_get_appointment_not_found():
 
 
 def test_create_appointment_duplicate_id():
-    
+
     client.post(
         "/patients", json={"id": 1, "name": "Alice", "email": "a@ex.com", "phone": "1"}
     )
