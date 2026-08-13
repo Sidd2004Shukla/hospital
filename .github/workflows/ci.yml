@@ -67,9 +67,9 @@ jobs:
       - name: Run Bandit
         # TIP: Added '-r' to recursively scan folders
         run: |
-          bandit  .
+          bandit -r .
 
-docker_build:
+  docker_build:
     name: Build Docker image
     runs-on: ubuntu-latest
     needs: tests
