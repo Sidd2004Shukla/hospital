@@ -28,4 +28,3 @@ Thumbs.db
 build/
 dist/
 *.egg-info/
-test_api.py
