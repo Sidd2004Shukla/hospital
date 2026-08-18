@@ -19,7 +19,9 @@ dependencies = [
     "ruff (>=0.16.2,<0.17.0)",
     "python-dotenv (>=1.2.2,<2.0.0)"
 ]
-
+[tool.bandit]
+exclude_dirs = ["tests"]
+skips = ["B101"]
 [tool.poetry]
 packages = [{include = "hospital", from = "src"}]
 
