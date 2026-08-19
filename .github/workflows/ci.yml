@@ -66,7 +66,7 @@ jobs:
           pip install bandit
       - name: Run Bandit
         run: |
-          bandit -r . -x tests/
+          bandit . -x tests/
 
   docker_build:
     name: Build Docker image
