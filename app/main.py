@@ -2,8 +2,8 @@
 
 from fastapi import FastAPI
 
-from hospital.database import Base, engine
-from hospital.routes import appointment_router, doctor_router, patient_router
+from app.database import Base, engine
+from app.routes import appointment_router, doctor_router, patient_router
 
 # Create all database tables
 Base.metadata.create_all(bind=engine)

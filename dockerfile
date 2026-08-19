@@ -13,4 +13,4 @@ ENV PYTHONPATH=/python-flask/src
 # The container must expose the FastAPI application and allow the API to be accessed[cite: 1]
 EXPOSE 8000
 
-CMD ["python3", "-m", "uvicorn", "hospital.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python3", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

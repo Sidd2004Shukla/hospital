@@ -4,7 +4,7 @@ from logging.config import fileConfig
 
 from alembic import context
 from dotenv import load_dotenv
-from hospital.database import Base
+from app.database import Base
 from sqlalchemy import engine_from_config, pool
 
 # 1. Load environment variables from the .env file
@@ -28,8 +28,8 @@ if config.config_file_name is not None:
 # IMPORTANT: To make --autogenerate work, you must import your Base and your models.
 # Uncomment and adjust the following lines based on your project structure:
 
-# from hospital.database import Base
-# from hospital import models
+# from app.database import Base
+# from app import models
 # target_metadata = Base.metadata
 
 # Leave this as None ONLY if you are not using --autogenerate,
