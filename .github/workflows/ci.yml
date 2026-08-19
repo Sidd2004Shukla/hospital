@@ -22,7 +22,7 @@ jobs:
           pip install ruff
       - name: Run linter (ruff)
         run: |
-          ruff check src .
+          ruff check app .
 
   tests:
     name: Gate 2 - Tests & Coverage
@@ -41,9 +41,9 @@ jobs:
           pip install pytest pytest-cov
       - name: Run tests with coverage
         env:
-          PYTHONPATH: src
+          PYTHONPATH: .
         run: |
-          pytest tests/ --cov=src --cov-fail-under=85 --cov-report=xml
+          pytest tests/ --cov=app --cov-fail-under=85 --cov-report=xml
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
