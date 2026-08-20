@@ -21,7 +21,7 @@ dependencies = [
 ]
 
 [tool.bandit]
-exclude_dirs = ["tests"]
+exclude_dirs = ["tests", "alembic", ".venv", "build", "dist"]
 skips = ["B101"]
 
 [tool.poetry]
